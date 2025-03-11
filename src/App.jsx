@@ -1,10 +1,22 @@
 import "./App.css";
+import NavBar from "./components/NavBar";
+import { BrowserRouter, Route, Routes } from "react-router";
+import HomePage from "./pages/HomePage";
+import LogInPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
+import BodyComponent from "./components/BodyComponent";
 
 function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <button className="btn w-64 rounded-full">Button</button>
+      <BrowserRouter basename="/">
+        <Routes>
+          <Route path="/" element={<BodyComponent></BodyComponent>}>
+            <Route path="/login" element={<LogInPage></LogInPage>}></Route>
+            <Route path="/signup" element={<SignUpPage></SignUpPage>}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
