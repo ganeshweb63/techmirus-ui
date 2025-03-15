@@ -1,18 +1,17 @@
-import { Outlet, useNavigate } from "react-router";
-import NavBar from "./NavBar";
-import FooterComponent from "./Footer";
-import { useEffect } from "react";
 import axios from "axios";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../slices/userSlice";
+import { useNavigate } from "react-router";
 import { BASE_URL } from "../utils/constants";
 import ApiRoutes from "../utils/ApiRoutes";
-import { useDispatch } from "react-redux";
-import { addUser } from "../slices/userSlice";
 
-const BodyComponent = () => {
+const ProfilePage = () => {
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
-    console.log("iam body");
     fetchUser();
   }, []);
 
@@ -31,11 +30,8 @@ const BodyComponent = () => {
   };
   return (
     <>
-      <NavBar></NavBar>
-      <Outlet></Outlet>
-      <FooterComponent></FooterComponent>
+      <h1>{user?.firstName}</h1>
     </>
   );
 };
-
-export default BodyComponent;
+export default ProfilePage;

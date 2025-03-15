@@ -2,11 +2,14 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../slices/userSlice";
+import { useNavigate } from "react-router";
 
 const LogInPage = () => {
   const [email, setEmail] = useState("user1@gmail.com");
   const [password, setPassword] = useState("User1@123");
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -20,7 +23,9 @@ const LogInPage = () => {
       );
       // TODO:
       console.log(res);
+
       dispatch(addUser(res.data));
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
